@@ -30,9 +30,9 @@ module Bypass
 	    end
 
 	    def parse_uri(uri)
-	      Bypass::URI.parse(uri.to_s.strip)
+	 		Bypass::URI.parse(uri.to_s.strip)
 	    rescue => ex
-	      nil
+			nil
 	    end
 
   	end
