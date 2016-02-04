@@ -2,9 +2,7 @@ module Bypass
   class Filter
     attr_reader :content, :fragment
     
-    URL_PATTERN = /\bhttps?:\/\/
-      [a-zA-Z0-9\-\._~:\/\?#\[\]@!$&'\(\)\*\+,;=%]+
-      [a-zA-Z0-9\-_~:\/\?#\[\]@!$&\*\+;=%]/x
+    URL_PATTERN = /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[\-;:&=\+\$,\w]+@)?[A-Za-z0-9\.\-]+|(?:www\.|[\-;:&=\+\$,\w]+@)[A-Za-z0-9\.\-]+)((?:\/[\+~%\/\.\w\-]*)?\??(?:[\-\+=&;%@\.\w]*)#?(?:[\.\!\/\\\w]*))?)/g;
     
     def initialize(content, options = {})
       @content = content.to_s.encode("UTF-8")
