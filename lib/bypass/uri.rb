@@ -2,9 +2,9 @@ require "addressable/uri"
 
 module Bypass
   class URI < Addressable::URI
-
+    binding.remote_pry
     URIREGEX = /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[\-;:&=\+\$,\w]+@)?[A-Za-z0-9\.\-]+|(?:www\.|[\-;:&=\+\$,\w]+@)[A-Za-z0-9\.\-]+)((?:\/[\+~%\/\.\w\-]*)?\??(?:[\-\+=&;%@\.\w]*)#?(?:[\.\!\/\\\w]*))?)/g;
-    
+
     def append_to_query_values(params = {})
       pairs = params.keys.map do |raw_key|
         key = CGI.escape(raw_key.to_s)
