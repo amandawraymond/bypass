@@ -24,7 +24,15 @@ module Bypass
 	private
   
 	    def gsub_urls(text, &block)
-			text.gsub(URL_PATTERN) do |url|	
+	    	punctutation = ["," , "." , ";" , ":" , "?" , "!"]
+
+	    	text.gsub(URL_PATTERN) do |url|
+	    		last_char = url.last
+	    		if punctuation.include?(last_char)
+	    			url = url.split("")
+	    			url = url.insert(-2, "")
+	    			url = url.join("")
+	    		end
 				url = "http://" + url unless (url.match(/^http:\/\//i) || url.match(/^https:\/\//i))
 				yield(url.to_s)
 			end
