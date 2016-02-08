@@ -3,9 +3,10 @@ module Bypass
     attr_reader :content, :fragment
     
     URL_PATTERN = %r{
-              (?: ((?:ed2k|ftp|http|https|irc|mailto|news|gopher|nntp|telnet|webcal|xmpp|callto|feed|svn|urn|aim|rsync|tag|ssh|sftp|rtsp|afs|file):)// | www\. )
-              [^\s<\u00A0"]+
-            }ix
+             	(?: ((?:ed2k|ftp|http|https|irc|mailto|news|gopher|nntp|telnet|webcal|xmpp|callto|feed|svn|urn|aim|rsync|tag|ssh|sftp|rtsp|afs|file):)// | www\. )
+             		[a-zA-Z0-9\-\._~:\/\?#\[\]@!$&'\(\)\*\+,;=%]+
+      				[a-zA-Z0-9\-_~:\/\?#\[\]@!$&\*\+;=%]+
+            	}ix
 
 	def initialize(content, options = {})
 		@content = content.to_s.encode("UTF-8")
