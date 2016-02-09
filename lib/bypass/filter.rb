@@ -32,6 +32,7 @@ module Bypass
 	    			url = url.split("")
 	    			url = url.insert(-2, "")
 	    			url = url.join("")
+	    			Rails.logger.info("in side punctuation:", url)
 	    		end
 				url = "http://" + url unless (url.match(/^http:\/\//i) || url.match(/^https:\/\//i))
 				yield(url.to_s)
