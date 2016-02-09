@@ -28,11 +28,11 @@ module Bypass
 
 	    	text.gsub(URL_PATTERN) do |url|
 	    		last_char = url.last
-	    		if punctuation.include?(last_char)
+	    		if punctutation.include?(last_char)
 	    			url = url.split("")
 	    			url = url.insert(-2, "")
 	    			url = url.join("")
-	    			Rails.logger.info("in side punctuation:", url)
+	    			Rails.logger.info("in side punctutation:", url)
 	    		end
 				url = "http://" + url unless (url.match(/^http:\/\//i) || url.match(/^https:\/\//i))
 				yield(url.to_s)
