@@ -3,10 +3,9 @@ module Bypass
     attr_reader :content, :fragment
     
     URL_PATTERN = %r{
-             	(?: ((?:ed2k|ftp|http|https|irc|mailto|news|gopher|nntp|telnet|webcal|xmpp|callto|feed|svn|urn|aim|rsync|tag|ssh|sftp|rtsp|afs|file):)// | www\. )
-             		[a-zA-Z0-9\-\._~:\/\?#\[\]@!$&'\(\)\*\+,;=%]+
-      				[a-zA-Z0-9\-_~:\/\?#\[\]@!$&\*\+;=%]+
-            	}ix
+              (?: ((?:ed2k|ftp|http|https|irc|mailto|news|gopher|nntp|telnet|webcal|xmpp|callto|feed|svn|urn|aim|rsync|tag|ssh|sftp|rtsp|afs|file):)// | www\. )
+              [^\s<\u00A0"]+
+            }ix
 
 	def initialize(content, options = {})
 		@content = content.to_s.encode("UTF-8")
@@ -24,16 +23,7 @@ module Bypass
 	private
   
 	    def gsub_urls(text, &block)
-	    	punctuation = ["," , "." , ";" , ":" , "?" , "!"]
-
-	    	text.gsub(URL_PATTERN) do |url|
-	    		last_char = url.last
-	    		if punctuation.include?(last_char)
-	    			url = url.split("")
-	    			url = url.insert(-2, " ")
-	    			url = url.join("")
-	    			Rails.logger.info("in side punctuation asdfasdf:", url)
-	    		end
+			text.gsub(URL_PATTERN) do |url|	
 				url = "http://" + url unless (url.match(/^http:\/\//i) || url.match(/^https:\/\//i))
 				yield(url.to_s)
 			end
